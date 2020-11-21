@@ -29,11 +29,7 @@ function buildDictionaryFromString(str) {
 
     for (let i = 0; i < str.length; i++) {
         const digit = str[i]
-        if (!obj[digit]) {
-            obj[digit] = 1
-        } else {
-            obj[digit]++
-        }
+        obj[digit] = (obj[digit] || 0) + 1
     }
 
     return obj
