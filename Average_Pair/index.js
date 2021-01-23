@@ -14,23 +14,17 @@ function averagePair(arr, target){
         // if average(i, pointer) === target, return true
         // otherwise, move pointer forward and check again
         // if average becomes larger than target or pointer hits the end, increment i, pointer goes next to it, and start over
-        console.log('i -', i)
-        console.log('pointer -', pointer)
         if ((arr[i] + arr[pointer]) / 2 === target) {
-            console.log('first match!', `i is ${i} and pointer is ${pointer}`)
             return true
         } else {
             pointer++
-            console.log('first not a match', `pointer is now ${pointer}`)
 
             if ((arr[i] + arr[pointer]) / 2 === target) {
-                console.log('second match!', `i is ${i} and pointer is ${pointer}`)
                 return true
             }
 
             if ((arr[i] + arr[pointer]) / 2 > target || pointer === (arr.length - 1)) {
                 pointer = i + 2
-                console.log('end not a match', `pointer is now ${pointer}`)
             }
         }
     }
@@ -38,6 +32,6 @@ function averagePair(arr, target){
     return false
 }
 
-// console.log(averagePair([1,2,3], 2.5)) // true
+console.log(averagePair([1,2,3], 2.5)) // true
 console.log(averagePair([1,3,3,5,6,7,10,12,19], 8)) // true
-// console.log(averagePair([-1,0,3,4,5,6], 4.1)) // false
+console.log(averagePair([-1,0,3,4,5,6], 4.1)) // false
