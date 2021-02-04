@@ -30,6 +30,6 @@ function maxSubArraySum(arr, num) {
 }
 
 console.log(maxSubArraySum([2,6,9,2,1,8,5,6,3], 3)) // 19
-console.log(maxSubArraySum([2,6,9,2,1,8,5,6,3], 4)) // 22
+console.log(maxSubArraySum([100,200,300,400], 2)) // 700
 console.log(maxSubArraySum([2,6,9,2,1,8,5,6,3], 15)) // null
 console.log(maxSubArraySum([2,6,9], 3)) // 17
