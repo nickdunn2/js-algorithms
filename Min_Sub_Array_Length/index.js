@@ -10,7 +10,19 @@
  * (Uses the Sliding Window Pattern to avoid nested loops.)
  */
 function minSubArrayLen(arr, num) {
+    // let pointer1 = 0
+    // let pointer2 = 1
 
+    for (let i = 0; i < arr.length; i++) {
+        let pointer = i + 1
+        let sum = arr[i] + arr[pointer]
+
+        while (sum < num) {
+            pointer++
+            sum += arr[pointer]
+            console.log('rolling sum -', sum)
+        }
+    }
     return arr
 }
 
