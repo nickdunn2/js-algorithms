@@ -8,12 +8,12 @@ const isPalindrome = (str) => {
     return true
   }
 
+  // Compare the first and last characters to each other.
+  // If they're the same, keep moving with what's remaining in the string.
+  // If they're different, you know it's not a palindrome.
   const lastChar = str.slice(-1)
   const firstChar = str.slice(0,1)
   const remaining = str.slice(1, -1)
-  // console.log('lastChar -', lastChar)
-  // console.log('firstChar -', firstChar)
-  // console.log('remaining -', remaining)
 
   if (lastChar !== firstChar) {
     return false
