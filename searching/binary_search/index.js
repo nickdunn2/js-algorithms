@@ -4,59 +4,25 @@
  * If the value does not exist, returns -1.
  */
 const binarySearch = (arr, val) => {
-  // create copy of array (for slicing later)
-  let slicedArray = arr
+  // set up initial left, right and middle pointers
+  let left = 0
+  let right = arr.length - 1
+  let mid = Math.floor((left + right) / 2)
 
-  // set up initial left/right pointers at beginning/end of array
-  let left = slicedArray[0]
-  let right = slicedArray[slicedArray.length - 1]
-
-  // while the left pointer is still before the right pointer, do your work
-  while (left < right) {
-    // if left pointer matches the val, return the index of that value from the ORIGINAL array
-    if (left === val) {
-      return arr.indexOf(left)
-    }
-
-    // if right pointer matches the val, return the index of that value from the ORIGINAL array
-    if (right === val) {
-      return arr.indexOf(right)
-    }
-
-    // calculate the midpoint of the slicedArray each time
-    const i = Math.floor(slicedArray.length / 2)
-    let mid = slicedArray[i]
-
-    // set up adjustedIndex for later use
-    let adjustedIndex
-
-    // if mid pointer matches the val, return the index of that value from the ORIGINAL array
-    if (mid === val) {
-      return arr.indexOf(mid)
-
-    // midpoint is too small. bump the left pointer up to the midpoint.
-    } else if (mid < val) {
-      left = mid
-      slicedArray = slicedArray.slice(slicedArray.indexOf(left))
-      adjustedIndex = Math.floor(slicedArray.length / 2)
-      mid = slicedArray[adjustedIndex]
-
-    // midpoint is too large. bump the right pointer down to the midpoint.
-    } else if (mid > val) {
-      right = mid
-      slicedArray = slicedArray.slice(0, slicedArray.indexOf(right) + 1)
-      adjustedIndex = Math.floor(slicedArray.length / 2)
-      mid = slicedArray[adjustedIndex]
-
-    // no logical reason this should ever be hit
+  // if mid pointer is not the val, and left pointer hasn't passed the right, keep searching
+  while (arr[mid] !== val && left <= right) {
+    if (val < arr[mid]) {
+      // mid pointer is too large. bump right pointer 1 to the left of mid.
+      right = mid -1
     } else {
-      console.log('something has gone weird')
-      return
+      // mid pointer is too large. bump left pointer 1 to the left of mid.
+      left = mid + 1
     }
+    // reset mid pointer in both cases
+    mid = Math.floor((left + right) / 2)
   }
 
-  // return -1 if the left/right pointers have reached each other without a match
-  return -1
+  return arr[mid] === val ? mid : -1
 }
 
 console.log(binarySearch([1,2,3,4,5], 2)) // 1
