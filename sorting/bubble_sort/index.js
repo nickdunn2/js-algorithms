@@ -3,7 +3,7 @@
  * The function uses a bubble sort algorithm.
  */
 const bubbleSort = (arr) => {
-  // an ES2015 way to swap values (in place) in an array
+  // an ES2015 way to swap two values (in place) in an array
   const swap = (arr, idx1, idx2) => {
     [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]
   }
