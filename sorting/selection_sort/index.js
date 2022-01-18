@@ -29,4 +29,4 @@ const selectionSort = (arr) => {
 
 console.log(selectionSort([34,22,10,19,17])) // [0,1,10,17,19,22,34]
 console.log(selectionSort([37,45,29,8,88,-3])) // [-3,8,29,37,45,88]
-console.log(selectionSort([6,1,2,3,4,5])) // [1,2,3,4,5,6,7,8]
+console.log(selectionSort([6,1,2,3,4,5])) // [1,2,3,4,5,6]
