@@ -1,5 +1,3 @@
-
-
 class Node {
   constructor(val) {
     this.val = val
@@ -36,10 +34,47 @@ class SinglyLinkedList {
 
     return this
   }
+
+  /**
+   * Pop a node from the tail of the SinglyLinkedList, and return it.
+   * Also, set the second-to-last node to be the new tail.
+   *
+   * @return Node | undefined
+   */
+  pop() {
+    // if list is empty, return undefined
+    if (!this.head) return undefined
+
+    let current = this.head
+    let newTail = current
+
+    // Loop through list until you reach the tail
+    while(current.next) {
+      newTail = current
+      current = current.next
+    }
+
+    // Set newTail (second-to-last node) to be the new tail, and decrement length
+    newTail.next = null
+    this.tail = newTail
+    this.length -= 1
+
+    // If list is now empty, set head & tail to null
+    if (this.length === 0) {
+      this.head = null
+      this.tail = null
+    }
+
+    return current
+  }
 }
 
 let list = new SinglyLinkedList()
 list.push('hello')
 list.push('yo')
 list.push('goodbye')
-console.log(list)
+list.push('still here')
+// console.log(list)
+console.log('list.tail before', list.tail)
+console.log(list.pop())
+console.log('list.tail after', list.tail)
