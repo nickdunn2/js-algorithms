@@ -67,6 +67,25 @@ class SinglyLinkedList {
 
     return current
   }
+
+  /**
+   * Remove and return list's head, setting its .next to be the new head.
+   */
+  shift() {
+    // if list is empty, return undefined
+    if (!this.head) return undefined
+
+    const oldHead = this.head
+    this.head = oldHead.next
+    this.length -= 1
+
+    // If list is now empty, set tail to null
+    if (this.length === 0) {
+      this.tail = null
+    }
+
+    return oldHead
+  }
 }
 
 let list = new SinglyLinkedList()
@@ -75,6 +94,6 @@ list.push('yo')
 list.push('goodbye')
 list.push('still here')
 // console.log(list)
-console.log('list.tail before', list.tail)
-console.log(list.pop())
-console.log('list.tail after', list.tail)
+console.log('list.head before', list.head)
+console.log(list.shift())
+console.log('list.head after', list.head)
