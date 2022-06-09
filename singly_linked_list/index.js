@@ -17,7 +17,7 @@ class SinglyLinkedList {
    * If there is no head, also set it as the head.
    * Update list's length and return the list.
    *
-   * @return this
+   * @return SinglyLinkedList
    */
   push(val) {
     let node = new Node(val)
@@ -95,7 +95,7 @@ class SinglyLinkedList {
    * Otherwise, set new node's next to be the old (current) head.
    * Update list's length and return the list.
    *
-   * @return {SinglyLinkedList}
+   * @return SinglyLinkedList
    */
   unshift(val) {
     const node = new Node(val)
@@ -112,6 +112,26 @@ class SinglyLinkedList {
 
     return this
   }
+
+  /**
+   * Return a node at a given "index" of the SinglyLinkedList.
+   * If input index is less than 0 or greater than list's length, return undefined.
+   *
+   * @return Node | undefined
+   */
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return undefined
+
+    let counter = 0
+    let node = this.head
+
+    while (counter < idx) {
+      node = node.next
+      counter++
+    }
+
+    return node
+  }
 }
 
 let list = new SinglyLinkedList()
@@ -119,6 +139,5 @@ list.push('hello')
 list.push('yo')
 list.push('goodbye')
 list.push('still here')
-console.log('list.head before', list.head)
-console.log(list.unshift('first'))
-console.log('list.head after', list.head)
+list.push('another')
+console.log(list.get(4))
