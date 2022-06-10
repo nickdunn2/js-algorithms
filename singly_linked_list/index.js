@@ -132,6 +132,24 @@ class SinglyLinkedList {
 
     return node
   }
+
+  /**
+   * Use get() to find node at idx.
+   * If node is found, set val of that node to be val passed in and return true.
+   * If node is not found, return false.
+   *
+   * @return boolean
+   */
+  set(idx, val) {
+    let foundNode = this.get(idx)
+
+    if (foundNode) {
+      foundNode.val = val
+      return true
+    }
+
+    return false
+  }
 }
 
 let list = new SinglyLinkedList()
@@ -140,4 +158,5 @@ list.push('yo')
 list.push('goodbye')
 list.push('still here')
 list.push('another')
-console.log(list.get(4))
+console.log(list.set(4, 'updated'))
+console.log('list after', list)
