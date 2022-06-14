@@ -134,14 +134,13 @@ class SinglyLinkedList {
   }
 
   /**
-   * Use get() to find node at idx.
-   * If node is found, set val of that node to be val passed in and return true.
-   * If node is not found, return false.
+   * Set ("update") value of a given index to be a given value.
+   * Return false if there is no node at the given index.
    *
    * @return boolean
    */
-  set(idx, val) {
-    let foundNode = this.get(idx)
+  set(index, val) {
+    let foundNode = this.get(index)
 
     if (foundNode) {
       foundNode.val = val
@@ -150,13 +149,40 @@ class SinglyLinkedList {
 
     return false
   }
+
+  /**
+   * Insert a new node with a given value at a given index in the list.
+   *
+   *  @return boolean
+   */
+  insert(index, val) {
+    // If index is less than 0 or greater than length, return false
+    if (index < 0 || index > this.length) return false
+
+    // If index is equal to the length, push a new node to the end
+    if (index === this.length) return !!this.push(val)
+
+    // If index is 0, unshift a new node to the start
+    if (index === 0) return !!this.unshift(val)
+
+    // Otherwise, get the node BEFORE the given index and insert after it.
+    const newNode = new Node(val)
+    let prevNode = this.get(index - 1)
+    const prevNext = prevNode.next
+    prevNode.next = newNode
+    newNode.next = prevNext
+    this.length++
+
+    return true
+  }
 }
 
 let list = new SinglyLinkedList()
-list.push('hello')
-list.push('yo')
-list.push('goodbye')
-list.push('still here')
-list.push('another')
-console.log(list.set(4, 'updated'))
+list.push(100)
+list.push(200)
+list.push(250)
+list.push(350)
+console.log(list.insert(0, 'FIRST'))
+console.log(list.insert(5, 'LAST'))
+console.log(list.insert(2, 150))
 console.log('list after', list)
