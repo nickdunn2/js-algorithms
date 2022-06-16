@@ -39,11 +39,11 @@ class SinglyLinkedList {
    * Pop a node from the tail of the SinglyLinkedList, and return it.
    * Also, set the second-to-last node to be the new tail.
    *
-   * @return Node | undefined
+   * @return Node | null
    */
   pop() {
-    // if list is empty, return undefined
-    if (!this.head) return undefined
+    // if list is empty, return null
+    if (!this.head) return null
 
     let current = this.head
     let newTail = current
@@ -71,11 +71,11 @@ class SinglyLinkedList {
   /**
    * Remove and return list's head, setting its .next to be the new head.
    *
-   * @return Node | undefined
+   * @return Node | null
    */
   shift() {
-    // if list is empty, return undefined
-    if (!this.head) return undefined
+    // if list is empty, return null
+    if (!this.head) return null
 
     const oldHead = this.head
     this.head = oldHead.next
@@ -115,12 +115,12 @@ class SinglyLinkedList {
 
   /**
    * Return a node at a given "index" of the SinglyLinkedList.
-   * If input index is less than 0 or greater than list's length, return undefined.
+   * If input index is less than 0 or greater than list's length, return null.
    *
-   * @return Node | undefined
+   * @return Node | null
    */
   get(idx) {
-    if (idx < 0 || idx >= this.length) return undefined
+    if (idx < 0 || idx >= this.length) return null
 
     let counter = 0
     let node = this.head
@@ -153,7 +153,7 @@ class SinglyLinkedList {
   /**
    * Insert a new node with a given value at a given index in the list.
    *
-   *  @return boolean
+   * @return boolean
    */
   insert(index, val) {
     // If index is less than 0 or greater than length, return false
@@ -175,6 +175,25 @@ class SinglyLinkedList {
 
     return true
   }
+
+  /**
+   * Remove node from a given index.
+   *
+   * @return Node | null
+   */
+  remove(index) {
+    // edge cases
+    if (index < 0 || index >= this.length) return null
+    if (index === this.length - 1) return this.pop()
+    if (index === 0) return this.shift()
+
+    const affectedNode = this.get(index - 1)
+    const removedNode = affectedNode.next
+    affectedNode.next = removedNode.next
+    this.length--
+
+    return removedNode
+  }
 }
 
 let list = new SinglyLinkedList()
@@ -182,7 +201,5 @@ list.push(100)
 list.push(200)
 list.push(250)
 list.push(350)
-console.log(list.insert(0, 'FIRST'))
-console.log(list.insert(5, 'LAST'))
-console.log(list.insert(2, 150))
+console.log(list.remove(1))
 console.log('list after', list)
