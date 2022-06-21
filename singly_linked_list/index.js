@@ -194,6 +194,41 @@ class SinglyLinkedList {
 
     return removedNode
   }
+
+  /**
+   * Reverse the list and return it.
+   */
+  reverse() {
+    let current = this.head
+    this.head = this.tail
+    this.tail = current
+
+    let next
+    let prev = null
+
+    for(let i = 0; i < this.length; i++) {
+      next = current.next
+      current.next = prev
+      prev = current
+      current = next
+    }
+
+    return this
+  }
+
+  /**
+   * Utility method to return array of all values in the list.
+   */
+  print() {
+    let arr = []
+    let current = this.head
+    while(current) {
+      arr.push(current.val)
+      current = current.next
+    }
+
+    return arr
+  }
 }
 
 let list = new SinglyLinkedList()
@@ -201,5 +236,6 @@ list.push(100)
 list.push(200)
 list.push(250)
 list.push(350)
-console.log(list.remove(1))
-console.log('list after', list)
+console.log('list before', list.print())
+list.reverse()
+console.log('list after', list.print())
