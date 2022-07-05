@@ -38,6 +38,32 @@ class DoublyLinkedList {
   }
 
   /**
+   * Pop a node from the tail of the DoublyLinkedList, and return it.
+   * Also, set the second-to-last node to be the new tail, and sever any connections
+   *
+   * @return Node | null
+   */
+  pop() {
+    // if list is empty, return null
+    if (!this.head) return null
+
+    let currentTail = this.tail
+
+    if (this.length === 1) {
+      this.head = null
+      this.tail = null
+    } else {
+      this.tail = currentTail.prev
+      this.tail.next = null
+      currentTail.prev = null
+    }
+
+    this.length--
+
+    return currentTail
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -54,9 +80,11 @@ class DoublyLinkedList {
 
 let list = new DoublyLinkedList()
 list.push(100)
-list.push(200)
-list.push(250)
-list.push(350)
-console.log('list', list)
+// list.push(200)
+// list.push(250)
+// list.push(350)
+console.log('list before', list)
+console.log(list.pop())
+console.log('list after', list)
 
 
