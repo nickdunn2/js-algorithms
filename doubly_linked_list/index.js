@@ -64,6 +64,31 @@ class DoublyLinkedList {
   }
 
   /**
+   * Remove and return list's head, setting its .next to be the new head.
+   *
+   * @return Node | null
+   */
+  shift() {
+    // if list is empty, return null
+    if (!this.head) return null
+
+    const oldHead = this.head
+
+    if (this.length === 1) {
+      this.head = null
+      this.tail = null
+    } else {
+      this.head = oldHead.next
+      oldHead.next = null
+      this.head.prev = null
+    }
+
+    this.length--
+
+    return oldHead
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -79,12 +104,10 @@ class DoublyLinkedList {
 }
 
 let list = new DoublyLinkedList()
-list.push(100)
+// list.push(100)
 // list.push(200)
 // list.push(250)
 // list.push(350)
 console.log('list before', list)
-console.log(list.pop())
+console.log(list.shift())
 console.log('list after', list)
-
-
