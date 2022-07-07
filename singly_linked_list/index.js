@@ -91,15 +91,13 @@ class SinglyLinkedList {
 
   /**
    * Push a new node to the beginning of the SinglyLinkedList.
-   * If there is no head, also set it as the head & tail.
-   * Otherwise, set new node's next to be the old (current) head.
-   * Update list's length and return the list.
    *
    * @return SinglyLinkedList
    */
   unshift(val) {
     const node = new Node(val)
 
+    // If there is no head, set node as the head & tail.
     if (!this.head) {
       this.head = node
       this.tail = node

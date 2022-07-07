@@ -89,6 +89,29 @@ class DoublyLinkedList {
   }
 
   /**
+   * Push a new node to the beginning of the DoublyLinkedList.
+   *
+   * @return DoublyLinkedList
+   */
+  unshift(val) {
+    const node = new Node(val)
+
+    // If there is no head, set node as the head & tail.
+    if (!this.head) {
+      this.head = node
+      this.tail = node
+    } else {
+      node.next = this.head
+      this.head.prev = node
+      this.head = node
+    }
+
+    this.length++
+
+    return this
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -109,5 +132,5 @@ let list = new DoublyLinkedList()
 // list.push(250)
 // list.push(350)
 console.log('list before', list)
-console.log(list.shift())
+console.log(list.unshift(50))
 console.log('list after', list)
