@@ -112,6 +112,40 @@ class DoublyLinkedList {
   }
 
   /**
+   * Return a node at a given "index" of the DoublyLinkedList.
+   *
+   * @return Node | null
+   */
+  get(idx) {
+    // If input index is less than 0 or greater than list's length, return null.
+    if (idx < 0 || idx >= this.length) return null
+
+    let current, counter
+
+    // If index is less than or equal to half the length, start from head and move forward.
+    if (idx <= this.length / 2) {
+      counter = 0
+      current = this.head
+
+      while (counter < idx) {
+        current = current.next
+        counter++
+      }
+    // Otherwise, start from tail and move backward.
+    } else {
+      counter = this.length - 1
+      current = this.tail
+
+      while (counter > idx) {
+        current = current.prev
+        counter--
+      }
+    }
+
+    return current
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -127,10 +161,13 @@ class DoublyLinkedList {
 }
 
 let list = new DoublyLinkedList()
-// list.push(100)
-// list.push(200)
-// list.push(250)
-// list.push(350)
-console.log('list before', list)
-console.log(list.unshift(50))
-console.log('list after', list)
+list.push(100)
+list.push(200)
+list.push(250)
+list.push(350)
+list.push(500)
+// console.log('list before', list)
+console.log(list.get(1))
+console.log(list.get(4))
+console.log(list.get(6))
+// console.log('list after', list)
