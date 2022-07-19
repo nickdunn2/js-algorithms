@@ -146,6 +146,23 @@ class DoublyLinkedList {
   }
 
   /**
+   * Set ("update") value of a given index to be a given value.
+   * Return false if there is no node at the given index.
+   *
+   * @return boolean
+   */
+  set(index, val) {
+    let foundNode = this.get(index)
+
+    if (foundNode) {
+      foundNode.val = val
+      return true
+    }
+
+    return false
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -166,8 +183,6 @@ list.push(200)
 list.push(250)
 list.push(350)
 list.push(500)
-// console.log('list before', list)
-console.log(list.get(1))
-console.log(list.get(4))
-console.log(list.get(6))
-// console.log('list after', list)
+console.log('list before', list)
+console.log(list.set(17, 201))
+console.log('list after', list)
