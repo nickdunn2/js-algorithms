@@ -163,6 +163,36 @@ class DoublyLinkedList {
   }
 
   /**
+   * Insert a new node with a given value at a given index in the list.
+   *
+   * @return boolean
+   */
+  insert(index, val) {
+    // If index is less than 0 or greater than length, return false
+    if (index < 0 || index > this.length) return false
+
+    // If index is equal to the length, push a new node to the end
+    if (index === this.length) return !!this.push(val)
+
+    // If index is 0, unshift a new node to the start
+    if (index === 0) return !!this.unshift(val)
+
+    // Otherwise, get the node BEFORE the given index and insert after it.
+    const newNode = new Node(val)
+    const beforeNode = this.get(index - 1)
+    const afterNode = beforeNode.next
+
+    // update all the connections of the nodes affected
+    beforeNode.next = newNode
+    newNode.prev = beforeNode
+    newNode.next = afterNode
+    afterNode.prev = newNode
+    this.length++
+
+    return true
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -184,5 +214,5 @@ list.push(250)
 list.push(350)
 list.push(500)
 console.log('list before', list)
-console.log(list.set(17, 201))
+console.log(list.insert(17, 199))
 console.log('list after', list)
