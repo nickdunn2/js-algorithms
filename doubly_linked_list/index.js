@@ -193,6 +193,30 @@ class DoublyLinkedList {
   }
 
   /**
+   * Remove node from a given index.
+   *
+   * @return Node | null
+   */
+  remove(index) {
+    // edge cases
+    if (index < 0 || index >= this.length) return null
+    if (index === this.length - 1) return this.pop()
+    if (index === 0) return this.shift()
+
+    const nodeToRemove = this.get(index)
+    const nodeBefore = nodeToRemove.prev
+    const nodeAfter = nodeToRemove.next
+    nodeBefore.next = nodeAfter
+    nodeAfter.prev = nodeBefore
+    nodeToRemove.next = null
+    nodeToRemove.prev = null
+
+    this.length--
+
+    return nodeToRemove
+  }
+
+  /**
    * Utility method to return array of all values in the list.
    */
   print() {
@@ -214,5 +238,5 @@ list.push(250)
 list.push(350)
 list.push(500)
 console.log('list before', list)
-console.log(list.insert(17, 199))
+console.log(list.remove(5))
 console.log('list after', list)
