@@ -35,6 +35,11 @@ class Queue {
     return this
   }
 
+  /**
+   * Remove and return queue's first, setting its .next to be the new first.
+   *
+   * @return number | null
+   */
   dequeue() {
     if (!this.first) {
       return null
