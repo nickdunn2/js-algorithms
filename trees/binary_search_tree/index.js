@@ -52,14 +52,37 @@ class BinarySearchTree {
       }
     }
   }
+
+  /**
+   * Search for a value in Binary Search Tree.
+   * Return the node if the value exists. Otherwise, return false.
+   */
+  find(val) {
+    if (!this.root) return false
+
+    let current = this.root
+    let found = false
+
+    // While we haven't found the value yet & there's still something to search
+    while(!found && !!current) {
+      if (val < current.value) {
+        current = current.left
+      } else if (val > current.value) {
+        current = current.right
+      } else {
+        found = true
+      }
+    }
+
+    return current ?? found
+  }
 }
 
 const tree = new BinarySearchTree()
 tree.insert(10)
-console.log('tree after 10', tree)
 tree.insert(5)
-console.log('tree after 5', tree)
 tree.insert(13)
 tree.insert(14)
 tree.insert(11)
-console.log('tree after 13 & 14 & 11', tree)
+console.log('find 10', tree.find(10))
+console.log('find 100', tree.find(100))
