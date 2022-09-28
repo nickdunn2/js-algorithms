@@ -76,6 +76,44 @@ class BinarySearchTree {
 
     return current ?? found
   }
+
+  /**
+   * Search (i.e., "traverse") all nodes of the tree, breadth-first.
+   */
+  breadthFirstSearch() {
+    // Create a queue (array that uses push/shift) variable
+    const queue = []
+
+    // Create a visited array that stores values of nodes visited
+    const visited = []
+
+    // Create variable for node that will change as we traverse
+    let node
+
+    // If there is a root, start there and push it onto the queue
+    if (this.root) {
+      node = this.root
+      queue.push(node)
+    }
+
+    /**
+     * While there is anything in the queue...
+     *  a) dequeue node from the queue and place its value in visited array
+     *  b) if there is a left on that dequeued node, add it to queue
+     *  c) if there is a right on that dequeued node, add it to queue
+     */
+    while (queue.length > 0) {
+      node = queue.shift()
+
+      visited.push(node.value)
+
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
+
+    // return the array of values of all nodes
+    return visited
+  }
 }
 
 const tree = new BinarySearchTree()
@@ -84,5 +122,4 @@ tree.insert(5)
 tree.insert(13)
 tree.insert(14)
 tree.insert(11)
-console.log('find 10', tree.find(10))
-console.log('find 100', tree.find(100))
+console.log(tree.breadthFirstSearch())
