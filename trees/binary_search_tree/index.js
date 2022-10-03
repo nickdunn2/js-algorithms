@@ -142,6 +142,36 @@ class BinarySearchTree {
     // return the array of values of all nodes
     return visited
   }
+
+  /**
+   * Search (i.e., "traverse") all nodes of the tree, depth-first, using the post-order technique.
+   */
+  postOrderSearch() {
+    // Create a visited array that stores values of nodes visited
+    const visited = []
+
+    /**
+     * Helper function that:
+     *  1) accepts a node and stores its value in visited array
+     *  2) if node has a left, recursively call itself with left
+     *  3) if node has a right, recursively call itself with right
+     */
+    const traverse = (node) => {
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+      // IMPORTANT: The only difference between pre- and post-order
+      // is that the pushing takes place AFTER the traversing.
+      visited.push(node.value)
+    }
+
+    // If there is a root, start there
+    if (this.root) {
+      traverse(this.root)
+    }
+
+    // return the array of values of all nodes
+    return visited
+  }
 }
 
 const tree = new BinarySearchTree()
@@ -152,4 +182,4 @@ tree.insert(14)
 tree.insert(11)
 tree.insert(2)
 tree.insert(8)
-console.log(tree.preOrderSearch())
+console.log(tree.postOrderSearch())
