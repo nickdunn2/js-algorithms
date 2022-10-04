@@ -172,6 +172,38 @@ class BinarySearchTree {
     // return the array of values of all nodes
     return visited
   }
+
+  /**
+   * Search (i.e., "traverse") all nodes of the tree, depth-first, using the in-order technique.
+   */
+  inOrderSearch() {
+    // Create a visited array that stores values of nodes visited
+    const visited = []
+
+    /**
+     * Helper function that:
+     *  1) accepts a node
+     *  2) if node has a left, recursively call itself with left
+     *  3) if node has a right, recursively call itself with right
+     *  4) stores each node's value in the visited array
+     */
+    const traverse = (node) => {
+      if (node.left) traverse(node.left)
+      // IMPORTANT: The only difference between this and pre/post-oder
+      // is that the pushing takes place AFTER traversing left and BEFORE traversing right.
+      visited.push(node.value)
+
+      if (node.right) traverse(node.right)
+    }
+
+    // If there is a root, start there
+    if (this.root) {
+      traverse(this.root)
+    }
+
+    // return the array of values of all nodes
+    return visited
+  }
 }
 
 const tree = new BinarySearchTree()
@@ -182,4 +214,4 @@ tree.insert(14)
 tree.insert(11)
 tree.insert(2)
 tree.insert(8)
-console.log(tree.postOrderSearch())
+console.log(tree.inOrderSearch())
