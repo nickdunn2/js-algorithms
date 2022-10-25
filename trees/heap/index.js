@@ -33,6 +33,63 @@ class MaxBinaryHeap {
       idx = parentIndex
     }
   }
+
+  /**
+   * Extract the max value (the root) from MaxBinaryHeap and return it.
+   * Also, "re-balance" the heap by:
+   *  1) placing the last item at the root
+   *  2) "sinking it down" to the correct spot
+   */
+  extractMax() {
+    const max = this.values[0]
+    const end = this.values.pop()
+
+    // Only reconfigure if there's still values left after extracting.
+    if (this.values.length > 0) {
+      this.values[0] = end
+      this.sinkDown()
+    }
+
+    return max
+  }
+
+  /**
+   * Look at the root value and -- if necessary -- sink it down to the correct place in the MaxBinaryHeap.
+   */
+  sinkDown() {
+    let idx = 0
+    const len = this.values.length
+    const el = this.values[0]
+
+    while(true) {
+      let leftChildIdx = 2 * idx + 1
+      let rightChildIdx = 2 * idx + 2
+      let leftChild, rightChild
+      let swap = null
+
+      if (leftChildIdx < len) {
+        leftChild = this.values[leftChildIdx]
+        if (leftChild > el) {
+          swap = leftChildIdx
+        }
+      }
+
+      if (rightChildIdx < len) {
+        rightChild = this.values[rightChildIdx]
+        if (
+            (swap === null && rightChild > el) ||
+            (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIdx
+        }
+      }
+
+      if (swap === null) break
+      this.values[idx] = this.values[swap]
+      this.values[swap] = el
+      idx = swap
+    }
+  }
 }
 
 let heap = new MaxBinaryHeap()
@@ -41,4 +98,6 @@ console.log('heap', heap.values)
 heap.insert(1)
 console.log('heap', heap.values)
 heap.insert(52)
+console.log('heap', heap.values)
+console.log('extractMax - ', heap.extractMax())
 console.log('heap', heap.values)
