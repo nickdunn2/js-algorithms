@@ -4,7 +4,7 @@ class MaxBinaryHeap {
   }
 
   /**
-   * Insert a value and "bubble it up" to the correct spot in the MaxBinaryHeap.
+   * Insert a value and "bubble it up" to the correct spot.
    */
   insert(val) {
     this.values.push(val)
@@ -35,7 +35,7 @@ class MaxBinaryHeap {
   }
 
   /**
-   * Extract the max value (the root) from MaxBinaryHeap and return it.
+   * Extract the max value (the root) and return it.
    * Also, "re-balance" the heap by:
    *  1) placing the last item at the root
    *  2) "sinking it down" to the correct spot
@@ -54,7 +54,7 @@ class MaxBinaryHeap {
   }
 
   /**
-   * Look at the root value and -- if necessary -- sink it down to the correct place in the MaxBinaryHeap.
+   * Look at the root value and -- if necessary -- sink it down to the correct place.
    */
   sinkDown() {
     let idx = 0
