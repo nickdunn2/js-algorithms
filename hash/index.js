@@ -19,8 +19,28 @@ class HashTable {
 
     return total
   }
+
+  /**
+   * Method to set a (hashed) key-value pair in the keyMap.
+   */
+  set(key, value) {
+    // hash the key
+    const index = this._hash(key)
+
+    // store the key-value pair in keyMap using separate chaining (arrays at each key)
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = []
+    }
+
+    this.keyMap[index].push([key, value])
+  }
+
+  get(key) {
+    // hash the key
+    // retrieve the key-value pair in keyMap
+    // return undefined if key is not found
+  }
 }
 
-// console.log(hash("pink", 10)) // 4
-// console.log(hash("orangered", 10)) // 6
-// console.log(hash("cyan", 10)) // 7
+const ht = new HashTable()
+ht.set("pink", "#481jfd")
