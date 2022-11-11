@@ -35,12 +35,39 @@ class HashTable {
     this.keyMap[index].push([key, value])
   }
 
+  /**
+   * Method to get the value of a key passed in.
+   */
   get(key) {
-    // hash the key
-    // retrieve the key-value pair in keyMap
-    // return undefined if key is not found
+    // hash the key to get index
+    const index = this._hash(key)
+
+    // check if keyMap contains anything at that index
+    if (this.keyMap[index]) {
+      // since we're using separate chaining, must loop through array of arrays at that index
+      for (let i = 0; i < this.keyMap[index].length; i++) {
+        if (this.keyMap[index][i][0] === key) {
+          return this.keyMap[index][i][1]
+        }
+      }
+    }
+
+    // return undefined if nothing is found
+    return undefined
   }
 }
 
-const ht = new HashTable()
-ht.set("pink", "#481jfd")
+const ht = new HashTable(17)
+ht.set("indianred", "#CD5C5C")
+ht.set("lightcoral", "#F08080")
+ht.set("salmon", "#FA8072")
+ht.set("darksalmon", "#E9967A")
+ht.set("lightsalmon", "#FFA07A")
+ht.set("red", "#FF0000")
+ht.set("maroon", "#800000")
+ht.set("yellow", "#FFFF00")
+console.log(ht.get('red')) // "#FF0000"
+console.log(ht.get('maroon')) // "#800000"
+console.log(ht.get('darksalmon')) // "#E9967A"
+console.log(ht.get('lightcoral')) // "#F08080"
+console.log(ht.get('poo poo')) // undefined
