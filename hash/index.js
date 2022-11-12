@@ -55,9 +55,52 @@ class HashTable {
     // return undefined if nothing is found
     return undefined
   }
+
+  /**
+   * Method to get an array of all the (unique) keys in the keyMap.
+   */
+  keys() {
+    const keysArr = []
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if(this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          const key = this.keyMap[i][j][0]
+
+          // In a better hash map, there would never be duplicate keys.
+          // The set() method would override if that key already existed.
+          // However, this is a super-basic hash map, so we do this check before pushing.
+          if (!keysArr.includes(key)) keysArr.push(key)
+        }
+      }
+    }
+
+    return keysArr
+  }
+
+  /**
+   * Method to get an array of all the (unique) values in the keyMap.
+   */
+  values() {
+    const valsArr = []
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if(this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          const val = this.keyMap[i][j][1]
+
+          // only push if the val is not already in valsArr
+          if (!valsArr.includes(val)) valsArr.push(val)
+        }
+      }
+    }
+
+    return valsArr
+  }
 }
 
 const ht = new HashTable(17)
+
 ht.set("indianred", "#CD5C5C")
 ht.set("lightcoral", "#F08080")
 ht.set("salmon", "#FA8072")
@@ -66,8 +109,14 @@ ht.set("lightsalmon", "#FFA07A")
 ht.set("red", "#FF0000")
 ht.set("maroon", "#800000")
 ht.set("yellow", "#FFFF00")
-console.log(ht.get('red')) // "#FF0000"
-console.log(ht.get('maroon')) // "#800000"
-console.log(ht.get('darksalmon')) // "#E9967A"
-console.log(ht.get('lightcoral')) // "#F08080"
-console.log(ht.get('poo poo')) // undefined
+ht.set("four", "#FFFF00")
+ht.set("boo", "#FFFF00")
+
+console.log(ht.keys())
+console.log(ht.values())
+
+// console.log(ht.get('red')) // "#FF0000"
+// console.log(ht.get('maroon')) // "#800000"
+// console.log(ht.get('darksalmon')) // "#E9967A"
+// console.log(ht.get('lightcoral')) // "#F08080"
+// console.log(ht.get('poo poo')) // undefined
