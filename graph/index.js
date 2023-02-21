@@ -40,20 +40,48 @@ class Graph {
     this.adjacencyList[v1] = this.adjacencyList[v1].filter(v => v !== v2)
     this.adjacencyList[v2] = this.adjacencyList[v2].filter(v => v !== v1)
   }
+
+  /**
+   * Depth-first search of a graph, recursively.
+   */
+  dfsRecursive(start) {
+    const result = []
+    const visited = {}
+    const adjacencyList = this.adjacencyList
+
+    // define anonymous helper function
+    function dfs(vertex) {
+      if (!vertex) return null
+
+      visited[vertex] = true
+      result.push(vertex)
+
+      adjacencyList[vertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor)
+        }
+      })
+
+    }
+    // immediately invoke it with start
+    dfs(start)
+
+    return result
+  }
 }
 
 const g = new Graph()
-g.addVertex('Tokyo')
-g.addVertex('Dallas')
-g.addVertex('Aspen')
-g.addVertex('HongKong')
-g.addVertex('LosAngeles')
-g.addEdge('Tokyo', 'Dallas')
-g.addEdge('Tokyo', 'HongKong')
-g.addEdge('Dallas', 'Aspen')
-g.addEdge('Dallas', 'HongKong')
-g.addEdge('Dallas', 'LosAngeles')
-g.addEdge('HongKong', 'LosAngeles')
-console.log(g.adjacencyList)
-g.removeVertex('HongKong')
-console.log(g.adjacencyList)
+g.addVertex('A')
+g.addVertex('B')
+g.addVertex('C')
+g.addVertex('D')
+g.addVertex('E')
+g.addVertex('F')
+g.addEdge('A', 'B')
+g.addEdge('A', 'C')
+g.addEdge('B', 'D')
+g.addEdge('C', 'E')
+g.addEdge('D', 'E')
+g.addEdge('D', 'F')
+g.addEdge('E', 'F')
+console.log(g.dfsRecursive('A'))
