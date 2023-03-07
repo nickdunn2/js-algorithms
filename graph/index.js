@@ -68,6 +68,33 @@ class Graph {
 
     return result
   }
+
+  /**
+   * Depth-first search of a graph, iteratively.
+   */
+  dfsIterative(start) {
+    const result = []
+    const visited = {}
+    const stack = [start]
+    let currentVertex
+
+    visited[start] = true
+
+    while (stack.length > 0) {
+      console.log('stack - ', stack)
+      currentVertex = stack.pop()
+      result.push(currentVertex)
+
+      this.adjacencyList[currentVertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true
+          stack.push(neighbor)
+        }
+      })
+    }
+
+    return result
+  }
 }
 
 const g = new Graph()
@@ -84,4 +111,4 @@ g.addEdge('C', 'E')
 g.addEdge('D', 'E')
 g.addEdge('D', 'F')
 g.addEdge('E', 'F')
-console.log(g.dfsRecursive('A'))
+console.log(g.dfsIterative('A'))
