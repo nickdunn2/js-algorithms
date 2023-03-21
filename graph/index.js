@@ -81,7 +81,6 @@ class Graph {
     visited[start] = true
 
     while (stack.length > 0) {
-      console.log('stack - ', stack)
       currentVertex = stack.pop()
       result.push(currentVertex)
 
@@ -94,6 +93,42 @@ class Graph {
     }
 
     return result
+  }
+
+  /**
+   * Breadth-first search of a graph.
+   */
+  bfs(start) {
+    // create a queue (array) and place start in it
+    // create visited (return) array
+    // create object to store nodes visited & mark start as visited
+    const result = []
+    const visited = {}
+    const queue = [start]
+    let currentVertex
+
+    visited[start] = true
+
+    while (queue.length > 0) {
+      currentVertex = queue.shift()
+      result.push(currentVertex)
+
+      this.adjacencyList[currentVertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true
+          queue.push(neighbor)
+        }
+      })
+    }
+
+    return result
+    // while something is in the queue
+    // remove first vertex in queue (shift) and push it to visited array
+    // mark it as visited
+    // loop over each vertex in adjacency list of that vertex
+    // if neighbor is NOT visited, mark it as visited and store it in the queue
+
+    // return visited array
   }
 }
 
@@ -111,4 +146,13 @@ g.addEdge('C', 'E')
 g.addEdge('D', 'E')
 g.addEdge('D', 'F')
 g.addEdge('E', 'F')
-console.log(g.dfsIterative('A'))
+
+//      A
+//    /   \
+//   B     C
+//   |     |
+//   D --- E
+//    \   /
+//      F
+
+console.log(g.bfs('A'))
