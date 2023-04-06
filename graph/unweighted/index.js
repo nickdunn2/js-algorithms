@@ -1,4 +1,4 @@
-class Graph {
+class UnweightedGraph {
   constructor() {
     this.adjacencyList = {}
   }
@@ -132,7 +132,7 @@ class Graph {
   }
 }
 
-const g = new Graph()
+const g = new UnweightedGraph()
 g.addVertex('A')
 g.addVertex('B')
 g.addVertex('C')
